@@ -1,6 +1,7 @@
 const express = require('express');
 const helmet = require('helmet');
 const cors = require('cors');
+const authRoutes = require('./routes/authRoutes');
 
 const corsOptions = {
 	origin: process.env.CORS_ORIGIN || 'http://localhost:3000',
@@ -15,6 +16,8 @@ const app = express();
 app.use(helmet());
 app.use(cors(corsOptions));
 app.use(express.json());
+
+app.use('/api/auth', authRoutes);
 
 app.get('/health', (req, res) => {
   res.status(200).json({
